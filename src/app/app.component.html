@@ -1,0 +1,320 @@
+<app-header></app-header>
+<p>{{ title }}</p>
+
+<p>{{ fun() }}</p>
+<p>2+2</p>
+<p>{{ 2 + 2 }}</p>
+
+<p>{{ title === "amit" }}</p>
+<!-- not matching  return -->
+
+<p>hello</p>
+
+<br /><br />
+<h3>function call</h3>
+<button (click)="getName('amit', 'pipaliya')">Fun Click</button>
+
+<br /><br />
+<h3>Important event</h3>
+<input type="text" #box (keyup)="keyUp(box.value)" placeholder="evnt keyup" />
+<p>name : {{ keyUpval }}</p>
+
+<input type="text" #box1 placeholder="evnt keyup" />
+<button (click)="clickFun(box1.value)">Click</button>
+<p>name : {{ displayByClick }}</p>
+
+<br /><br />
+<h3>Counter</h3>
+<button #box (click)="counterFun('add')">++</button>
+<button (click)="counterFun('minus')">--</button>
+<p>Count : {{ count }}</p>
+<p [ngStyle]="{ color: 'red' }" style="color: red">{{ alert }}</p>
+
+<br /><br />
+<h3>if condition</h3>
+<p *ngIf="show == 'amit'; then ifblock; else elseblock">show</p>
+
+<ng-template #ifblock> if block </ng-template>
+
+<ng-template #elseblock> else block </ng-template>
+
+<br /><br />
+<h3>else if condition</h3>
+<ng-template [ngIf]="color == 'red'">
+  <p style="color: red">red color</p>
+</ng-template>
+<ng-template [ngIf]="color == 'green'">
+  <p style="color: green">green color</p>
+</ng-template>
+<ng-template [ngIf]="color == 'blue'">
+  <p style="color: blue">blue color</p>
+</ng-template>
+
+<br /><br />
+<h3>Switch case</h3>
+<div [ngSwitch]="colorSwitch">
+  <p *ngSwitchCase="'red'" style="color: red">red color</p>
+  <p *ngSwitchCase="'green'" style="color: green">green color</p>
+  <p *ngSwitchCase="'blue'" style="color: blue">blue color</p>
+  <p *ngSwitchDefault>no color</p>
+</div>
+
+<br /><br />
+<h3>For loop (*ngFor)</h3>
+<p *ngFor="let item of user">{{ item }}</p>
+
+<!-- <div *ngFor="let item of userDetails">
+  <p>Name : {{item.name}} </p>
+  <p>email : {{item.email}} </p>
+  <p>password : {{item.password}} </p>
+</div> -->
+<p *ngFor="let item of userDetails">
+  Name : {{ item.name }} - email : {{ item.email }} - password :
+  {{ item.password }}
+</p>
+
+<br /><br />
+<h3>Nested loop</h3>
+
+<ul *ngFor="let user of userDetSec">
+  <li>Name : {{ user.name }}</li>
+  <li>Email : {{ user.email }}</li>
+  <li>Social Account :</li>
+  <ul *ngFor="let acc of user.socialAcounts">
+    <li>{{ acc }}</li>
+  </ul>
+</ul>
+
+<br /><br />
+<h3>Style binding</h3>
+<p [style.color]="colors" [style.backgroundColor]="bgColor">
+  Lorem, ipsum dolor
+</p>
+
+<button (click)="updareColor()">Update Color</button>
+
+<br /><br />
+<h3>Header</h3>
+<app-header></app-header>
+
+<br /><br />
+<h3>Basic Angular form ngForm</h3>
+<form #basicForm="ngForm" (ngSubmit)="submitForm(basicForm.value)">
+  <input type="text" ngModel name="user" placeholder="Enter your name" />
+  <br /><br />
+  <input type="text" ngModel name="email" placeholder="Enter your email" />
+  <br /><br />
+  <input type="text" ngModel name="pass" placeholder="Enter your password" />
+  <br /><br />
+  <button>Submit</button>
+</form>
+
+<p>name : {{ userData.user }}</p>
+<p>email : {{ userData.email }}</p>
+<p>password : {{ userData.pass }}</p>
+
+<br /><br />
+<h3>Toggle element</h3>
+<button (click)="toggle()">Toggle</button>
+<p *ngIf="display">Toggle works hide/show</p>
+
+<br /><br />
+<h3>Todo list</h3>
+<input type="text" #item placeholder="Enter new task" /> <br />
+<button (click)="addItem(item.value)">Add item</button>
+<div *ngFor="let a of toDoList">
+  <p>{{ a.data }} <button (click)="remove(a.id)">remove</button></p>
+</div>  
+
+<br /><br />
+<h3>2 Todo list</h3>
+<input type="text" #item2 placeholder="Enter new task" /> <br />
+<button (click)="addItem2(item2.value)">Add item</button>
+<ul *ngFor="let x of toDoSec">
+  <li>{{x.data}} <button (click)="remove2(x.id)">remove</button></li>
+</ul>
+  
+
+<br /><br />
+<h3>Send data parent to child</h3>
+<app-child [item]="dataForChild" [item2]="secDataForChild"> </app-child>
+<button (click)="updateChildComponent()">Update child component</button>
+
+
+<br /><br />
+<h3>Send data child to parent</h3>
+<app-child-two (item)="updateParentData($event)"></app-child-two>
+<p>{{dataForPar}}</p>
+
+
+
+
+<br /><br />
+<h3>Reusable component</h3>
+<div *ngFor="let user of userDetailReuse">
+  <app-re-usable [itemreuse]="user"></app-re-usable>
+</div>
+
+
+<input type="text" [(ngModel)]="name5">
+<p>{{name5}}</p>
+
+
+<br /><br />
+<h3>Pipe</h3>
+<p>{{title | uppercase }}</p>
+<p>{{title | lowercase }}</p>
+<p>{{today}}</p>
+<p>{{today | date}}</p>
+<p>{{today | date:"fullDate"}}</p>
+<p>{{capStr(title)}}</p>
+
+
+
+
+<br /><br />
+<h3>Advance Pipe</h3>
+<p>{{title | slice: 2 : 8 | uppercase}}</p>
+<p>{{11 | currency : 'USD'}}</p>
+<p>{{11.311447|number: '5.1-4'}}</p>
+<p>{{2.3|number: '3.3-5'}}</p>
+
+
+
+<br /><br />
+<h3>Custom Pipe</h3>
+
+{{2 | usdInr : 72}}
+
+
+<br /><br />
+<h3>Form validation (template driven form)</h3>
+
+<form #formValidation="ngForm" (ngSubmit)="loginUse(formValidation.value)">
+  <input type="text" required  #name="ngModel" email ngModel name="name" placeholder="Enter email">
+  <br/><br/>
+  <span *ngIf="name.invalid" style="color: red;">Enter valid input</span>
+  <br/><br/>
+  <input type="text" required #password="ngModel" minlength="2" ngModel name="password"s placeholder="password">
+  <br/><br/>
+  <span *ngIf="password.invalid" style="color: red;" >Enter valid input</span>
+  <br/><br/>
+  <button>Submit</button>
+</form>
+
+ 
+<br /><br />
+<h3>Reactive Form</h3>
+<form [formGroup]="reactiveform" (ngSubmit)="loginReactive()">
+    <input type="text" placeholder="Enter name"  formControlName="user">
+    <br/><br/>
+    <input type="text" placeholder="Enter name"  formControlName="password">
+    <br/><br/>
+    <button>Submit</button>
+</form>
+
+
+
+<br /><br />
+<h3>Reactive Form with validation</h3>
+<form [formGroup]="reactiveformValidation" (ngSubmit)="loginReactiveValidation()">
+    <input type="text"  placeholder="Enter name"  formControlName="names">
+    <br/>
+    <span *ngIf="nameVali && nameVali.invalid && nameVali.touched" style="color: red;">Invalid feilds</span>
+    <br/>
+    <input type="text" placeholder="Enter email"  formControlName="emails">
+    <br/>
+    <span *ngIf="emailVali && emailVali.invalid && emailVali.touched" style="color: red;">Invalid feilds</span>
+    <br/>
+    <input type="text" placeholder="Enter password"  formControlName="passwords">
+    <br/>
+    <span *ngIf="passVali && passVali.invalid && passVali.touched" style="color: red;">Invalid feilds</span>
+    <br/>
+    <button [disabled]="reactiveformValidation.invalid">Submit</button>
+</form>
+
+
+
+<br /><br />
+<h3>Custom directive (change element color by directive)</h3>
+<p>Element red</p>
+<p appRedEl >Element red</p>
+
+
+
+<br /><br />
+<h3>Routing</h3>
+
+<div class="routers">
+  <nav class="router">
+    <img src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Logo">
+    
+    <ul>
+      <li><a routerLink="">Home</a></li>
+      <li><a routerLink="about">About</a></li>
+      <li><a routerLink="contact/1">Contact</a></li>
+      <li><a routerLink="contact/2">Contact</a></li>
+      <li><a routerLink="contact/3">Contact</a></li>
+    </ul>
+  </nav>
+</div>
+<router-outlet></router-outlet> 
+
+
+<br /><br />
+<h3>Child Routing</h3>
+<div class="routers">
+  <nav class="router">
+    <img src="https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Logo">
+    
+    <ul>
+      <li><a routerLink="childhome">Home</a></li>
+      <li><a routerLink="childabout">About</a></li>
+    </ul>
+  </nav>
+</div>
+  <router-outlet></router-outlet>
+
+
+<br /><br /><br />
+<h3>Service</h3>
+<ul>
+  <li *ngFor="let use of users"> {{use.name}} - {{use.email}}- {{use.age}} </li>
+</ul>
+
+<p>same data from component by service</p>
+<app-databyservice></app-databyservice>
+
+
+<br /><br /><br />
+<h3>API call</h3>
+<ul>
+  <li *ngFor="let x of userforapi">{{x.title}} -- {{x.price}} -- {{x.rating}}</li>
+</ul>
+
+
+
+<br /><br /><br />
+<h3>API post</h3>
+<form #postapiform="ngForm" (ngSubmit)="postapimethod(postapiform.value)">
+  <input type="text" ngModel name="title" placeholder="Enter title">
+  <br/><br/>
+  <input type="text" ngModel name="author" placeholder="Enter author">
+  <br/><br/>
+  <button>Submit</button>
+</form>
+
+
+<br /><br /><br />
+<app-user-list-com></app-user-list-com>
+
+<app-user-sec-com></app-user-sec-com>
+
+<app-user-third-com></app-user-third-com>
+
+<app-user-both></app-user-both>
+
+<app-login></app-login>
+
+<br />
+<br />

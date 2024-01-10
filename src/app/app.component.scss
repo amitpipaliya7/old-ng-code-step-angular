@@ -1,0 +1,29 @@
+// .red{
+//     color: red;
+// }
+
+.routers nav img{
+    width: 100px;
+    cursor: pointer;
+}
+
+.routers nav {
+    background-color: black ;
+    padding: 10PX;
+}
+.router ul{
+   
+    float: right;
+    list-style-type: none;
+}
+
+.router ul li {
+    display: inline-block;
+}   
+
+.router ul li a {
+    text-decoration: none;
+    color: white;
+    padding: 10px;
+    margin: 10px;
+}
